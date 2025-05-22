@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Properties</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    slidesPerView: 1,
+    spaceBetween: 20,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+</script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head >
+
+<body class="bg-gray-100">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-black via-gray-900 to-black shadow-lg shadow-gray-800/30">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="https://earmacs.com/" class="flex items-center space-x-2">
+        <img src="./HTML/photos/Earmacs Tourism.jpg" alt="EARMACS Logo" class="h-20 w-auto">
+
+      </a>
+
+      <!-- Navigation Wrapper -->
+<nav class="bg-gray-900 px-4 py-3">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    
+    <!-- Logo / Brand Name -->
+   
+<!-- Navigation Wrapper -->
+<nav class="bg-gray-900 px-4 py-3 relative">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    
+    <!-- Logo / Brand Name -->
+    
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-toggle" class="text-gray-300 md:hidden focus:outline-none hover:text-white transition duration-300">
+      <!-- Hamburger Icon -->
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex space-x-4">
+      <a href="https://earmacs.com/" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="https://earmacs.com/contact-us-2" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
+      <a href="#" class="text-gray-300 hover:text-white transition duration-300">Login</a>
+      <a href="./Booking_sub-main/agent_register.php" class="text-gray-300 hover:text-white transition duration-300">Register (for B2B)</a>
+    </div>
+  </div>
+
+  <!-- Slide-in Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-gray-900 transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden shadow-lg">
+    <div class="flex flex-col space-y-4 p-6">
+      <a href="https://earmacs.com/" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="https://earmacs.com/contact-us-2" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
+      <a href="#" class="text-gray-300 hover:text-white transition duration-300">Login</a>
+      <a href="./Booking_sub-main/agent_register.php" class="text-gray-300 hover:text-white transition duration-300">Register (for B2B)</a>
+    </div>
+  </div>
+</nav>
+
+<!-- JavaScript for toggle -->
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('-translate-x-full');
+  });
+</script>
+
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Property 1 -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300">
+        <img src="./HTML/photos/Untitled design (2).jpg" alt="Property 1" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-gray-800">Laitumiong</h2>
+          <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+            Once abandoned, Laitumiong is now a rising eco-tourism spot under EARMACS, offering cosy hilltop homestays, scenic views, and a peaceful retreat. Visitors can enjoy natural springs, a unique water recycling system, and explore the historic David Scott Trail.
+          </p>
+          <a href="book-now-Laitumiong.php?property_id=4"
+             class="inline-block mt-4 px-6 py-2 text-white font-semibold bg-gradient-to-r from-emerald-500 to-green-600 rounded-full shadow-md hover:from-emerald-600 hover:to-green-700 hover:scale-105 transition-all duration-300 ease-in-out">
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Property 2 -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300">
+        <img src="./includes/Mylliem/Untitled design (23).png" alt="Property 2" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-gray-800">Mylliem</h2>
+          <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+            Situated in a quiet off-road nook in Mylliem, the Mylliem Zostel under EARMACS offers a tranquil and safe retreat for travelers. This Zostel system caters to men, women, and also features a unisex section, making it ideal for families and friends wishing to stay together.
+          </p>
+          <a href="book-now-Mylliem.php"
+             class="inline-block mt-4 px-6 py-2 text-white font-semibold bg-gradient-to-r from-emerald-500 to-green-600 rounded-full shadow-md hover:from-emerald-600 hover:to-green-700 hover:scale-105 transition-all duration-300 ease-in-out">
+            Book now
+          </a>
+        </div>
+      </div>
+
+      <!-- Property 3 -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300">
+        <img src="./includes/Langkawet/WhatsApp Image 2025-04-26 at 11.25.48 AM (1).jpeg" alt="Property 3" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-gray-800">Langkawet</h2>
+          <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+            Langkawet – The Retreat, located 48 km from Shillong in East Khasi Hills, offers comfortable private lodging amid a biodiverse landscape. With self-cooking options, local assistance, and clean spring water, it’s a peaceful getaway with essential amenities and a communal dining space.
+          </p>
+          <a href="book-now-Langkawet.php?property_id=3"
+             class="inline-block mt-4 px-6 py-2 text-white font-semibold bg-gradient-to-r from-emerald-500 to-green-600 rounded-full shadow-md hover:from-emerald-600 hover:to-green-700 hover:scale-105 transition-all duration-300 ease-in-out">
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Property 4 -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300">
+        <img src="./includes/Kyiem/RFC10173.jpg" alt="Property 4" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-gray-800">Kyiem</h2>
+          <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+            Kyiem Traveller’s Nest Homestay, located in the peaceful village of Kyiem near Mawphlang, Meghalaya, offers travellers a unique blend of comfort and local culture. Situated 28 km south of Shillong, this charming retreat features five eco-friendly cottages. 
+          </p>
+          <a href="book-now-Kyiem.php?property_id=5"
+             class="inline-block mt-10 px-6 py-2 text-white font-semibold bg-gradient-to-r from-emerald-500 to-green-600 rounded-full shadow-md hover:from-emerald-600 hover:to-green-700 hover:scale-105 transition-all duration-300 ease-in-out">
+            Book Now
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <section class="bg-[#fff3e6] py-28 relative">
+  <div class="absolute inset-x-0 bottom-[-2rem] flex justify-center">
+    <div class="bg-white w-40 h-40 md:w-44 md:h-44 rounded-full flex flex-col justify-center items-center shadow-md">
+      <span id="counter" class="text-4xl font-semibold text-gray-900">0%</span>
+      <p class="text-sm text-center text-gray-700 mt-2 leading-4 uppercase">Customer<br>Satisfaction</p>
+    </div>
+  </div>
+</section>
+
+
+
+ 
+    
+  </div>
+  <section class="max-w-6xl mx-auto px-4 py-12">
+  <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">What Our Clients Say</h2>
+
+  <div class="relative overflow-hidden">
+    <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0);">
+      
+      <!-- Testimonial 1 -->
+      <div class="w-full md:w-1/3 px-4 shrink-0">
+        <div class="bg-white rounded-xl shadow-md p-6 h-full">
+          <p class="text-gray-600 italic">"A cozy and comfortable place in the heart of Shillong. The staff were friendly and helpful throughout my stay."</p>
+          <h4 class="mt-4 font-semibold text-indigo-600">Alvareen Lyndem</h4>
+          
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="w-full md:w-1/3 px-4 shrink-0">
+        <div class="bg-white rounded-xl shadow-md p-6 h-full">
+          <p class="text-gray-600 italic">"Loved the serene atmosphere and beautiful view from the room. Felt just like home!"</p>
+          <h4 class="mt-4 font-semibold text-indigo-600">Sani Khyriem</h4>
+          
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="w-full md:w-1/3 px-4 shrink-0">
+        <div class="bg-white rounded-xl shadow-md p-6 h-full">
+          <p class="text-gray-600 italic">"Perfect location and great service. I’ll definitely come back on my next visit to Shillong."</p>
+          <h4 class="mt-4 font-semibold text-indigo-600">Priya Sharma</h4>
+          
+        </div>
+      </div>
+
+      <!-- Testimonial 4 -->
+      <div class="w-full md:w-1/3 px-4 shrink-0">
+        <div class="bg-white rounded-xl shadow-md p-6 h-full">
+          <p class="text-gray-600 italic">"Warm hospitality and clean rooms made my stay truly memorable. Highly recommended!"</p>
+          <h4 class="mt-4 font-semibold text-indigo-600">Rebecca Syiemiong</h4>
+          
+        </div>
+      </div>
+
+      
+     
+
+    </div>
+
+    <!-- Controls -->
+    <div class="flex justify-between mt-6">
+      <button id="prevSlide" class="text-indigo-600 hover:text-indigo-800 text-2xl">&#10094;</button>
+      <button id="nextSlide" class="text-indigo-600 hover:text-indigo-800 text-2xl">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  const track = document.getElementById("testimonial-track");
+  const prev = document.getElementById("prevSlide");
+  const next = document.getElementById("nextSlide");
+
+  const totalItems = track.children.length;
+  let currentIndex = 0;
+
+  // Get width dynamically (on resize also)
+  function getSlideWidth() {
+    const slide = track.children[0];
+    return slide.offsetWidth + 32; // 32px padding (px-4 on both sides)
+  }
+
+  function updateSlider() {
+    const width = getSlideWidth();
+    track.style.transform = `translateX(-${currentIndex * width}px)`;
+  }
+
+  next.addEventListener("click", () => {
+    if (currentIndex < totalItems - 3) {
+      currentIndex++;
+      updateSlider();
+    }
+  });
+
+  prev.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlider();
+    }
+  });
+
+  // Auto Slide
+  setInterval(() => {
+    if (currentIndex < totalItems - 3) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    updateSlider();
+  }, 4000);
+
+  // Adjust slider on window resize
+  window.addEventListener('resize', updateSlider);
+</script>
+
+  <!-- Satisfaction Counter Section -->
+
+
+
+
+    <!-- WhatsApp Button -->
+  <a id="whatsapp-button" href="#" target="_blank"
+     class="fixed bottom-5 left-5 z-50 bg-green-500 hover:bg-green-600 transition duration-300 rounded-full p-3 shadow-lg">
+    <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="Chat on WhatsApp" class="w-8 h-8">
+  </a>
+  
+
+  <script>
+    // Set your WhatsApp number here (with country code, no + or -)
+    const phoneNumber = '+918731940028'; // <-- change this to your WhatsApp number
+    document.getElementById('whatsapp-button').href = `https://wa.me/${phoneNumber}`;
+  </script>
+  
+
+
+  <!-- Footer -->
+  <footer class="bg-black border-t border-gray-800 mt-10">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center text-white text-center md:text-left">
+    <div class="mb-4 md:mb-0">
+      &copy;2025 All Rights Reserved. Website developed by 
+      <a href="https://scabbardtech.com" target="_blank" class="text-green-400 hover:text-blue-300 transition duration-300">ScabbardTech</a>.
+    </div>
+    <div>
+      📞 <a href="tel:+911234567890" class="hover:underline">+91 87319 40028</a> &nbsp;|&nbsp;
+      ✉️ <a href="mailto:info@scabbardtech.com" class="hover:underline">travel@earmacs.com</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- CountUp.js -->
+<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.umd.js"></script>
+
+<script>
+  let hasCounted = false;
+
+  function animateCounter(id, end, duration) {
+    const counter = document.getElementById(id);
+    let start = 0;
+    const range = end - start;
+    const increment = end > start ? 1 : -1;
+    const stepTime = Math.abs(Math.floor(duration / range));
+
+    const timer = setInterval(() => {
+      start += increment;
+      counter.textContent = start + "%";
+      if (start === end) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+  }
+
+  window.addEventListener('scroll', function () {
+    const counter = document.getElementById("counter");
+    const rect = counter.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+    if (isVisible && !hasCounted) {
+      animateCounter("counter", 98, 2000); // 98% in 2 seconds
+      hasCounted = true;
+    }
+  });
+</script>
+
+
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const bookButtons = document.querySelectorAll('.book-now-btn');
+      const propertyIdInput = document.getElementById('propertyIdInput');
+
+      bookButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const propertyId = this.getAttribute('data-property-id');
+          propertyIdInput.value = propertyId;
+
+          // Optionally scroll to the form
+          document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

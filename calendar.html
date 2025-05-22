@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Calendar</title>
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <!-- Custom CSS to highlight booked dates -->
+    <style>
+        .flatpickr-day.booked-date {
+            background-color: green !important;
+            color: white !important;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Property Booking Calendar</h2>
+    <input type="text" id="calendar" placeholder="View bookings">
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- JavaScript to fetch and apply booked dates -->
+    <script>
+        const propertyId = 1; // Set your dynamic property_id here
+
+        fetch(`get_booked_dates.php?property_id=${propertyId}`)
+            .then(response => response.json())
+            .then(bookedDates => {
+                flatpickr("#calendar", {
+                    inline: true,
+                    enable: [date => true], // Optional: allow all dates to be enabled
+                    onDayCreate: function(dObj, dStr, fp, dayElem) {
+                        const date = dayElem.dateObj.toISOString().split('T')[0];
+                        if (bookedDates.includes(date)) {
+                            dayElem.classList.add("booked-date");
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching booked dates:", error));
+    </script>
+
+</body>
+</html>
