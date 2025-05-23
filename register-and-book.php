@@ -7,7 +7,7 @@ require 'vendor/autoload.php';// Path to Razorpay SDK
 
 use Razorpay\Api\Api;
 
-$api_key = 'rzp_test_0Y1F8erafToHmY';
+$api_key = 'rzp_test_Uf88y3rnsJK0DG';
 $api_secret = 'yF5YGj09hTprP040e3kmDa0s'; // Replace with your Razorpay secret key
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['set_password'])) {
@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['set_password'])) {
     $package_id = $_POST['package_id'];
     $extra_persons = $_POST['extra_persons'];
     $total_price = preg_replace('/[^\d.]/', '', $_POST['totalPrice']);
+    if ($total_price === '' || !is_numeric($total_price)) {
+        die("Invalid total price.");
+    }
+    $total_price = (float)$total_price;
     $password = $_POST['password'];
 
     // Check if user exists
@@ -81,9 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['set_password'])) {
     <body class="bg-light">
     <div class="container mt-5">
         <div class="alert alert-info">
-            Click the button below to complete your payment.
+            Redirecting to payment...
         </div>
-        <button id="payBtn" class="btn btn-success">Pay Now</button>
     </div>
     <script>
         var options = {
@@ -109,8 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['set_password'])) {
             }
         };
         var rzp1 = new Razorpay(options);
-        document.getElementById('payBtn').onclick = function(e) {
-            e.preventDefault();
+        window.onload = function() {
             rzp1.open();
         };
     </script>

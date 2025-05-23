@@ -206,11 +206,12 @@ Once abandoned, Laitumiong is now a rising eco-tourism spot under EARMACS, offer
 </section>
     </div>
 
+
     <!-- Right Column: Booking Form -->
     <div class="form-container bg-white p-6 rounded-lg shadow-md mb-0">
 <h2>Book a Room at <?= htmlspecialchars($property['name']) ?></h2>
 
-    <form method="POST" action="process_booking.php">
+    <form method="POST" action="register-and-confirm.php">
         <input type="hidden" name="property_id" value="<?= $property_id ?>">
 
         <div class="mb-3">
@@ -224,8 +225,8 @@ Once abandoned, Laitumiong is now a rising eco-tourism spot under EARMACS, offer
         </div>
 
         <div class="mb-3">
-            <label>Email (optional)</label>
-            <input type="email" name="email" class="form-control">
+            <label>Email *</label>
+            <input type="email" name="email" class="form-control" required>
         </div>
 
         <div class="mb-3">
@@ -260,62 +261,68 @@ Once abandoned, Laitumiong is now a rising eco-tourism spot under EARMACS, offer
         <div class="mb-3">
             <label>Total Price:</label>
             <input type="text" id="totalPrice" class="form-control" readonly>
+            <input type="hidden" id="totalPriceHidden" name="totalPrice" value="">
         </div>
 
-        <button type="submit" class="btn btn-success">Confirm Booking</button>
+        <button type="submit" class="btn btn-success">Book Now</button>
     </form>
+</div>
+    
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
     function changeImage(imageSrc){
         document.getElementById("mainImage").src = imageSrc;
     }
-        const fullyBooked = <?= json_encode($fullyBookedDates) ?>;
-        const packages = <?= json_encode($packages) ?>;
-        const today = new Date().toISOString().split('T')[0];
+    const fullyBooked = <?= json_encode($fullyBookedDates) ?>;
+    const packages = <?= json_encode($packages) ?>;
+    const today = new Date().toISOString().split('T')[0];
 
-        const checkIn = flatpickr("#checkIn", {
-            dateFormat: "Y-m-d",
-            disable: fullyBooked,
-            minDate: today,
-            onChange: function(selectedDates, dateStr) {
-                checkOut.set("minDate", dateStr);
-                calculatePrice();
-            }
-        });
-
-        const checkOut = flatpickr("#checkOut", {
-            dateFormat: "Y-m-d",
-            disable: fullyBooked,
-            minDate: today,
-            onChange: calculatePrice
-        });
-
-        document.getElementById("package_id").addEventListener("change", calculatePrice);
-        document.getElementById("extra_persons").addEventListener("input", calculatePrice);
-
-        function calculatePrice() {
-            const checkInDate = new Date(document.getElementById("checkIn").value);
-            const checkOutDate = new Date(document.getElementById("checkOut").value);
-            const packageId = document.getElementById("package_id").value;
-            const extraPersons = parseInt(document.getElementById("extra_persons").value) || 0;
-
-            // Validate date range
-            if (checkInDate && checkOutDate && checkOutDate > checkInDate && packageId) {
-                const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
-                const selectedOption = document.querySelector(`#package_id option[value="${packageId}"]`);
-
-                const basePrice = parseFloat(selectedOption.dataset.b2c);
-                const extraPrice = parseFloat(selectedOption.dataset.extra);
-
-                // Total price calculation
-                const total = (basePrice + (extraPersons * extraPrice)) * nights;
-                document.getElementById("totalPrice").value = `₹${total.toFixed(2)}`;
-            } else {
-                document.getElementById("totalPrice").value = 'Invalid dates or package selection';
-            }
+    const checkIn = flatpickr("#checkIn", {
+        dateFormat: "Y-m-d",
+        disable: fullyBooked,
+        minDate: today,
+        onChange: function(selectedDates, dateStr) {
+            checkOut.set("minDate", dateStr);
+            calculatePrice();
         }
-    </script>
-</body>
+    });
 
+    const checkOut = flatpickr("#checkOut", {
+        dateFormat: "Y-m-d",
+        disable: fullyBooked,
+        minDate: today,
+        onChange: calculatePrice
+    });
+
+    document.getElementById("package_id").addEventListener("change", calculatePrice);
+    document.getElementById("extra_persons").addEventListener("input", calculatePrice);
+
+    function calculatePrice() {
+        const checkInDate = new Date(document.getElementById("checkIn").value);
+        const checkOutDate = new Date(document.getElementById("checkOut").value);
+        const packageId = document.getElementById("package_id").value;
+        const extraPersons = parseInt(document.getElementById("extra_persons").value) || 0;
+
+        // Validate date range
+        if (checkInDate && checkOutDate && checkOutDate > checkInDate && packageId) {
+            const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+            const selectedOption = document.querySelector(`#package_id option[value="${packageId}"]`);
+
+            const basePrice = parseFloat(selectedOption.dataset.b2c);
+            const extraPrice = parseFloat(selectedOption.dataset.extra);
+
+            // Total price calculation
+            const total = (basePrice + (extraPersons * extraPrice)) * nights;
+            document.getElementById("totalPrice").value = `₹${total.toFixed(2)}`;
+            document.getElementById("totalPriceHidden").value = total.toFixed(2); // Set numeric value for backend
+        } else {
+            document.getElementById("totalPrice").value = 'Invalid dates or package selection';
+            document.getElementById("totalPriceHidden").value = '';
+        }
+    }
+</script>
+    
+</body>
 </html>
