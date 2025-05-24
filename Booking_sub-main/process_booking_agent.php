@@ -8,12 +8,19 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'agent') {
     die("Unauthorized access.");
 }
 
+// Razorpay payment verification (basic)
+if (empty($_POST['razorpay_payment_id'])) {
+    die("Payment not verified. Please try again.");
+}
+$razorpay_payment_id = $_POST['razorpay_payment_id'];
+
 $agent_id = $_SESSION['id']; // Corrected session variable
 $property_id = $_POST['property_id'] ?? null;
 $guest_id = $_POST['guest_id'] ?? null;
 $check_in = $_POST['check_in_date'] ?? null;
 $check_out = $_POST['check_out_date'] ?? null;
 $base_price = $_POST['base_price'] ?? null;
+$discounted_price = $_POST['discounted_price'] ?? null;
 
 // Basic validation
 if (!$property_id || !$guest_id || !$check_in || !$check_out || !$base_price) {

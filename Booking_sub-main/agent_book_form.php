@@ -103,7 +103,7 @@ if ($is_agent) {
 <body class="container py-4">
     <h2>Book a Room at <?= htmlspecialchars($property['name']) ?></h2>
 
-    <form method="POST" action="process_booking_agent.php">
+    <form method="POST" action="agent_payment.php">
         <input type="hidden" name="guest_id" id="guestIdField">
         <input type="hidden" name="property_id" value="<?= $property_id ?>">
         <input type="hidden" name="base_price" value="<?= $exampleRoom['base_price'] ?>">
@@ -157,6 +157,7 @@ if ($is_agent) {
         <div class="mb-3">
             <label>Discounted Price (10% off):</label>
             <input type="text" id="discountedPrice" class="form-control" readonly>
+            <input type="hidden" id="discountedPriceHidden" name="discounted_price">
         </div>
 
         <button type="submit" class="btn btn-success">Confirm Booking</button>
@@ -197,9 +198,11 @@ if ($is_agent) {
 
             document.getElementById("totalPrice").value = `₹${total.toFixed(2)}`;
             document.getElementById("discountedPrice").value = `₹${discounted.toFixed(2)}`;
+            document.getElementById("discountedPriceHidden").value = discounted.toFixed(2);
         } else {
             document.getElementById("totalPrice").value = '';
             document.getElementById("discountedPrice").value = '';
+            document.getElementById("discountedPriceHidden").value = '';
         }
     }
         // Auto-fill guest details if agent selects a guest

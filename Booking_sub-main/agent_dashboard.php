@@ -110,85 +110,112 @@ $bookings = $bookings->fetchAll();
 }
     </style>
 </head>
-<body>
-    <div class="container mt-4">
-        <h2>Welcome, Agent Dashboard</h2>
+<body style="background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%); min-height:100vh;">
+    <div class="container py-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-3 mb-md-0">Welcome, Agent</h2>
+            <a href="agent_properties.php" class="btn btn-success shadow-sm">
+                <i class="bi bi-building"></i> Select Properties for your Guest
+            </a>
+        </div>
 
         <!-- Guests Section -->
-        <h4 class="mt-4">Guests</h4>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($guests as $guest): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($guest['name']) ?></td>
-                        <td><?= htmlspecialchars($guest['email']) ?></td>
-                        <td><?= htmlspecialchars($guest['phone']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Guests</h4>
+                <button onclick="window.location.href='agent_add_guest.php'" class="cssbuttons-io-button">
+                    <svg height="24" width="24" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+                    </svg>
+                    <span>Add Guest</span>
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($guests as $guest): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($guest['name']) ?></td>
+                                <td><?= htmlspecialchars($guest['email']) ?></td>
+                                <td><?= htmlspecialchars($guest['phone']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <?php if (empty($guests)): ?>
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">No guests added yet.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-<!-- Bookings Section -->
-<h4 class="mt-4">Your Bookings</h4>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Guest</th>
-            <th>Room</th>
-            <th>Check-in</th>
-            <th>Check-out</th>
-            <th>Total Price</th>
-            <th>Status</th>
-            <th>Action</th> <!-- New column -->
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($bookings as $booking): ?>
-            <tr>
-                <td><?= htmlspecialchars($booking['guest_name']) ?></td>
-                <td><?= htmlspecialchars($booking['room_name']) ?></td>
-                <td><?= htmlspecialchars($booking['check_in_date']) ?></td>
-                <td><?= htmlspecialchars($booking['check_out_date']) ?></td>
-                <td><?= htmlspecialchars($booking['total_price']) ?></td>
-                <td><?= htmlspecialchars($booking['status']) ?></td>
-                <td>
-                    <form action="generate_invoice.php" method="get" style="display:inline;">
-                        <input type="hidden" name="booking_id" value="<?= $booking['id'] ?>">
-                        <button class="button">
-                            <span class="button-content">Download</span>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-
-
-        <!-- Add Guest Button -->
-<button onclick="window.location.href='agent_add_guest.php'"  class="cssbuttons-io-button">
-  <svg
-    height="24"
-    width="24"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M0 0h24v24H0z" fill="none"></path>
-    <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
-  </svg>
-  <span>Add</span>
-</button>
-        <a href="agent_properties.php" class="btn btn-success mt-3">Select Properties for your Guest</a>
+        <!-- Bookings Section -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h4 class="mb-0">Your Bookings</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Guest</th>
+                            <th>Room</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Invoice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($bookings as $booking): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($booking['guest_name']) ?></td>
+                                <td><?= htmlspecialchars($booking['room_name']) ?></td>
+                                <td><?= htmlspecialchars($booking['check_in_date']) ?></td>
+                                <td><?= htmlspecialchars($booking['check_out_date']) ?></td>
+                                <td>₹<?= number_format($booking['total_price'], 2) ?></td>
+                                <td>
+                                    <?php if ($booking['status'] === 'pending'): ?>
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    <?php elseif ($booking['status'] === 'approved'): ?>
+                                        <span class="badge bg-success">Approved</span>
+                                    <?php elseif ($booking['status'] === 'cancelled'): ?>
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary"><?= htmlspecialchars($booking['status']) ?></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <form action="generate_invoice.php" method="get" style="display:inline;">
+                                        <input type="hidden" name="booking_id" value="<?= $booking['id'] ?>">
+                                        <button class="button" type="submit">
+                                            <span class="button-content">Download</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <?php if (empty($bookings)): ?>
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">No bookings found.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
